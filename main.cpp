@@ -39,13 +39,7 @@ int main(){
         case 8:    
             modifyRegister(machine);
             break;
-        case 9:  
-            printState(machine);
-            break; 
-        case 10:  
-            printScreen(machine);
-            break;
-        case 11:        
+        case 9:    
             cout <<"Exit"<<endl;
             break;
         default:
@@ -55,7 +49,7 @@ int main(){
 
 
     }
-    while(choice != 11 );
+    while(choice != 9 );
 
     return 0;
 }
