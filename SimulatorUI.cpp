@@ -5,7 +5,9 @@
 
 using namespace std;
 
-void displayMenu(){
+SimulatorUI::SimulatorUI() {}
+
+void SimulatorUI::displayMenu(){
 
     cout << "1. Load Program" << endl;
     cout << "2. Run" << endl;
@@ -15,14 +17,16 @@ void displayMenu(){
     cout << "6. Display Register" << endl;
     cout << "7. Modify Memory" << endl;
     cout << "8. Modify Register" <<endl;
-    cout << "9. Exit" <<endl;
+    cout << "9. printState" <<endl;
+    cout << "10. printScreen" <<endl;
+    cout << "11. Exit" <<endl;
     
 }
+
+void SimulatorUI:: loadProgram(Machine&machine){
 string filename;
 string startAddrHexa;
 bool x;
-
-void loadProgram(Machine&machine){
 
     cout <<"enter file name:"<<endl;
     cin >> filename;
@@ -40,9 +44,9 @@ void loadProgram(Machine&machine){
     }
     
 }
-void run(Machine&machine){
+void SimulatorUI::run(Machine&machine){
 
-     x = machine.run();
+   bool x = machine.run();
     
     if(x){
         cout << "the program is run successfully" <<endl;
@@ -52,9 +56,9 @@ void run(Machine&machine){
     }
 }
 
-void step(Machine&machine){
+void SimulatorUI::step(Machine&machine){
    
-    x = machine.step();
+    bool x = machine.step();
     
     if(x){
         cout << "the result of the instruction" <<endl;
@@ -63,12 +67,12 @@ void step(Machine&machine){
         cout << "fail to find a result of the instruction" <<endl;
     }
 }
-void reset(Machine&machine){
+void SimulatorUI::reset(Machine&machine){
 
     machine.resetAll();
     cout << "the machine is reset" <<endl;
 }
-void displayMemory(Machine&machine){
+void SimulatorUI::displayMemory(Machine&machine){
    const Memory& memory = machine.getMemory();
 
     for(int i = 0; i < 16; i++ ){
@@ -82,7 +86,7 @@ void displayMemory(Machine&machine){
 }
         cout << dec;
 }
-void displayRegister(Machine&machine){
+void SimulatorUI::displayRegister(Machine&machine){
     const RegisterFile& registers = machine.getRegisters();
 
     for(int i = 0; i < 16; i++ ){
@@ -93,7 +97,7 @@ void displayRegister(Machine&machine){
 }
     cout << dec;
 }
-void modifyMemory(Machine&machine){
+void SimulatorUI::modifyMemory(Machine&machine){
     string address, value;
 
     cout << "Enter address" <<endl;
@@ -107,7 +111,7 @@ void modifyMemory(Machine&machine){
     machine.setMemoryCell(x,y);
     cout << "Memory is modified" <<endl;
 }
-void modifyRegister(Machine&machine){
+void SimulatorUI::modifyRegister(Machine&machine){
     string value;
     string regNum;
 
@@ -121,4 +125,27 @@ void modifyRegister(Machine&machine){
 
     machine.setRegister(x, y);
     cout << "Register is modified" <<endl;
+}
+void SimulatorUI::printState(Machine& machine){
+    uint8_t pc = machine.getPC();
+    cout << "PC: " << dec << static_cast<int>(pc) << " ";  
+
+    string ir = machine.getIR();
+    cout << "IR:"<< ir << endl;
+    const RegisterFile& registers = machine.getRegisters();
+
+    for(int i = 0; i < 16; i++ ){
+
+     cout << "R" << i << ":" ;    
+    cout << hex << uppercase << setw(2) << setfill('0')
+     << static_cast<int>(registers.get(i)) << " ";      
+    
+}
+     cout << dec;
+}
+void SimulatorUI::printScreen(Machine& machine) {
+    const string output = machine.getMemory().getScreenOutput();
+
+    cout << "\n========== SCREEN OUTPUT ==========\n";
+    cout << output << endl;
 }

@@ -8,38 +8,45 @@ int main(){
     cout << "Welcome to the Vole Machine Simulator!" << endl;
    
     Machine machine;
+    SimulatorUI ui;
 
     do{
-        displayMenu();
+        ui.displayMenu();
     cout << "Enter an option from the menu above." << endl;
     cin >> choice;
     switch(choice){
 
         case 1:
-             loadProgram(machine);
+             ui.loadProgram(machine);
             break;
         case 2:    
-             run(machine);
+             ui.run(machine);
             break;
         case 3:    
-           step(machine);
+           ui.step(machine);
             break;
         case 4:    
-            reset(machine);
+            ui.reset(machine);
             break;
         case 5:    
-            displayMemory(machine);
+            ui.displayMemory(machine);
             break;
         case 6:    
-            displayRegister(machine);
+            ui.displayRegister(machine);
             break;
         case 7:    
-            modifyMemory(machine);
+            ui.modifyMemory(machine);
             break;
         case 8:    
-            modifyRegister(machine);
+            ui.modifyRegister(machine);
             break;
-        case 9:    
+        case 9:  
+            ui.printState(machine);
+            break; 
+        case 10:  
+            ui.printScreen(machine);
+            break;
+        case 11:        
             cout <<"Exit"<<endl;
             break;
         default:
@@ -49,7 +56,7 @@ int main(){
 
 
     }
-    while(choice != 9 );
+    while(choice != 11 );
 
     return 0;
 }

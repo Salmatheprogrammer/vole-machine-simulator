@@ -1,4 +1,18 @@
+#pragma once
+
+#include <iostream>
+#include <string>
+#include <cstdint>
+
 #include "Machine.h"
+
+class SimulatorUI {
+private:
+   
+
+public:
+
+    SimulatorUI();
 void displayMenu();
 void loadProgram(Machine& machine);
 void run(Machine& machine);
@@ -8,3 +22,7 @@ void displayMemory(Machine& machine);
 void displayRegister(Machine& machine);
 void modifyMemory(Machine& machine);
 void modifyRegister(Machine& machine);
+void printState(Machine& machine);
+void printScreen(Machine& machine);
+
+};
