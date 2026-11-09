@@ -15,7 +15,9 @@ void displayMenu(){
     cout << "6. Display Register" << endl;
     cout << "7. Modify Memory" << endl;
     cout << "8. Modify Register" <<endl;
-    cout << "9. Exit" <<endl;
+    cout << "9. printState" <<endl;
+    cout << "10. printScreen" <<endl;
+    cout << "11. Exit" <<endl;
     
 }
 string filename;
@@ -121,4 +123,30 @@ void modifyRegister(Machine&machine){
 
     machine.setRegister(x, y);
     cout << "Register is modified" <<endl;
+}
+void printState(Machine& machine){
+    uint8_t pc = machine.getPC();
+    cout << "PC:" << hex << uppercase << setw(2) << setfill('0')
+     << static_cast<int>(pc) << " ";     
+
+    string ir = machine.getIR();
+    cout << "IR:"<< ir << endl;
+    const RegisterFile& registers = machine.getRegisters();
+
+    for(int i = 0; i < 16; i++ ){
+
+     cout << "R" << i << ":" ;    
+    cout << hex << uppercase << setw(2) << setfill('0')
+     << static_cast<int>(registers.get(i)) << " ";      
+    
+}
+     cout << dec;
+}
+void printScreen(Machine& machine) {
+    const Memory& memory = machine.getMemory();
+
+    string screenOutput = memory.getScreenOutput();
+
+    cout << "Screen Display:" << endl;
+    cout << screenOutput << endl;
 }
