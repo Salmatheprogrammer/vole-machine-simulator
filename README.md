@@ -43,7 +43,7 @@ Dr. Mohammad El-Ramly
 8. Switch between Light Mode and Dark Mode using the theme button.
 
 ## Team Members
-- Rawan
-- Sama
-- Salma
-- Malak
+- Rawan Osama
+- Sama Tarek
+- Salma Ayman
+- Malak Abdelhamid
