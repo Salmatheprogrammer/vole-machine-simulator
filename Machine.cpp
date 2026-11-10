@@ -52,14 +52,13 @@ bool Machine::loadProgram(string filename, string startAddrHexa) {
 
     // the loop that reads lines and stores the instructions in memory
     while (getline(programFile,line)) {
-
+       // cout << "Read line: [" << line << "]" << endl;
         // to skip spaces and comments
         size_t startOfInstruction = line.find_first_not_of(" \t");
         if (startOfInstruction ==string:: npos) {continue;}
         line=line.substr(startOfInstruction);
-        if ( line.empty() || line[0] == ';') {
-            continue;
-        }
+        if ( line.empty() || line[0] == ';') { continue;}
+
 
         // to not store data out of bound
         if (currentAddr + 1 > 255) {
@@ -89,6 +88,7 @@ bool Machine::loadProgram(string filename, string startAddrHexa) {
         //storing instructions in memory
         memory.write(( uint8_t)currentAddr , byte1);
         memory.write(( uint8_t)(currentAddr+1) ,byte2);
+        //cout << "Stored instruction at address: " << currentAddr << endl;
         currentAddr += 2;
     }
     programFile.close();
@@ -112,7 +112,7 @@ bool Machine::step() {
     return cpu.step();
 }
 bool Machine::run() {
-    if (cpu.isHalted()){cout<<"isHalted bool is true\n"; return false;} // to show if there is error while testing *****************###***
+    //if (cpu.isHalted()){cout<<"isHalted bool is true\n"; return false;}
     while (!cpu.isHalted()) {
         if (!cpu.step()) {
             return false;
