@@ -41,7 +41,7 @@ It allows users to load programs, execute instructions, modify registers and mem
 
 
 ## Team Members
-- Rawan
-- Sama
-- Salma
-- Malak
+- Rawan Osama
+- Sama Tarek
+- Salma Ayman
+- Malak Abdelhamid
